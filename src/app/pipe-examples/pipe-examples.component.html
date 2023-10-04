@@ -1,0 +1,64 @@
+<h3>Pipe Examples</h3>
+
+<p>Title: {{ book.title | uppercase | camelCase }}</p>
+<p>Rating: {{ book.rating | number:'1.1-1' }}</p>
+<p>Length: {{ book.length | number }}</p>
+<p>Price: {{ book.price | currency:'BRL' }}</p>
+<p>URL: {{ book.url }}</p>
+
+<!-- Using Format -->
+<!-- <p>Published On: {{ book.publishedOn | date:'dd/MMM/yyyy' }}</p> -->
+
+<!-- Using LOCALE_ID -->
+<p>Published On: {{ book.publishedOn | date }}</p>
+
+<br>
+
+<p>Book: {{ book | json }}</p>
+
+<br>
+
+<input type="text" [(ngModel)]="filter">
+
+<br>
+
+<input type="text" #newBook>
+<button type="button" (click)="addBook(newBook.value)">Add Book</button>
+
+<br>
+
+<h3>Pipe Pure (Bad to filter and order)</h3>
+
+<ul>
+  <li *ngFor="let b of books | arrayFilterPure:filter">
+    {{ b }}
+  </li>
+</ul>
+
+<br>
+
+<h3>Pipe Impure (Bad to filter and order)</h3>
+
+<ul>
+  <li *ngFor="let b of books | arrayFilterImpure:filter">
+    {{ b }}
+  </li>
+</ul>
+
+<br>
+
+<h3>Good to filter and order</h3>
+
+<ul>
+  <li *ngFor="let b of getBooks()">
+    {{ b }}
+  </li>
+</ul>
+
+<br>
+
+<h3>Pipe Async</h3>
+
+<p>Promise: {{ valuePromise | async }}</p>
+
+<p>Observable: {{ valueObservable | async }}</p>
